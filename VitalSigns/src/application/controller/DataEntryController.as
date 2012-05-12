@@ -448,6 +448,7 @@ package application.controller
 		protected function dataentrycontroller_addHandler(event:FlexEvent):void
 		{
 			VitalSigns.registerSwipeListener(viewChange);
+			mainTab.selectedIndex = 2;
 			
 			dataEntryData = new DataEntryData(); //initialize data
 			loginUser = VitalSigns.currentUser; //initialize nurse

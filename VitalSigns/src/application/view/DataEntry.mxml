@@ -194,4 +194,7 @@
 		
 	</s:VGroup>
 	</s:Scroller>
+	<s:HGroup width="100%" bottom="0" right="0" left="0">
+		<component:MainTab id="mainTab" dataProvider="{mainTabPics}" width="100%"></component:MainTab>
+	</s:HGroup>
 </c:DataEntryController>

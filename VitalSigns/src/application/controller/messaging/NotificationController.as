@@ -3,6 +3,7 @@ package application.controller.messaging
 	
 	import application.factory.INotifier;
 	import application.view.ConversationView;
+	import application.component.MainTab;
 	
 	import domain.IObservable;
 	import domain.conversation.Conversation;
@@ -118,6 +119,12 @@ package application.controller.messaging
 				_arrConversations = array;
 		}
 		
+		//======================================================================
+		//Tab features throughout application
+		[Bindable]
+		protected var mainTabPics:ArrayCollection = new ArrayCollection( [ "1", "2", "3", "4", "5" ] );
+		public var mainTab:MainTab = new MainTab();
+		//======================================================================
 		
 	}
 }

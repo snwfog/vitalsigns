@@ -92,8 +92,9 @@
 			
 			private function timeOutExit():void{
 				if(isTimeOut)
-					NativeApplication.exit();
+					NativeApplication.nativeApplication.exit();
 			}
+			//--------------------------------------------------------
 			
 			private function onOrientationChange( soe:StageOrientationEvent ):void
 			{
