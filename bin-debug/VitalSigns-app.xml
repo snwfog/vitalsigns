@@ -258,8 +258,5 @@
 		]]></InfoAdditions>
         <requestedDisplayResolution>high</requestedDisplayResolution>
     </iPhone>
-<extensions>
-        <extensionID>com.inoel.ane.speech</extensionID>
-    <extensionID>com.adobe.mobile</extensionID>
-    </extensions>
+
 </application>

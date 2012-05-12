@@ -11,7 +11,7 @@ package
 				return "";
 			
 			var joined:String = "";
-			var lastIndex = array.length - 1;
+			var lastIndex:Number = array.length - 1;
 			
 			for( var i:int = 0; i < lastIndex; i++ )
 				joined += array.getItemAt( i ) + delimiter;
