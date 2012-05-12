@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:s="library://ns.adobe.com/flex/spark"
+		xmlns:fx="http://ns.adobe.com/mxml/2009"
+		xmlns:d="http://ns.adobe.com/fxg/2008/dt"
+		xmlns:graphics="assets.graphics.*"
+		xmlns:components="components.*"
+		width="100%" xmlns:assets="assets.*">
+	
+	<fx:Metadata>[HostComponent("spark.components.RadioButton")]</fx:Metadata>
+
+	<s:states>
+		<s:State name="up"/>
+		<s:State name="over"/>
+		<s:State name="down"/>
+		<s:State name="disabled"/>
+		<s:State name="upAndSelected"/>
+		<s:State name="overAndSelected"/>
+		<s:State name="downAndSelected"/>
+		<s:State name="disabledAndSelected"/>
+	</s:states>
+
+	<s:Group width="100%">
+		<s:Rect d:userLabel="Rectangle" width="100%" height="60">
+			<s:stroke>
+				<s:SolidColorStroke caps="none" color="#000000" joints="miter" miterLimit="4" weight="1"/>
+			</s:stroke>
+			<s:fill>
+				<s:SolidColor color="#FFFFFF"/>
+			</s:fill>
+		</s:Rect>
+		<s:HGroup width="100%" height="60" verticalAlign="middle">
+			<s:RichText id="labelDisplay" 
+						width="95%" height="100%" 
+						color="#000000" color.down = "#103271" color.disabledAndSelected="#103271" color.overAndSelected="#103271" color.upAndSelected="#103271"
+						fontSize="20" fontWeight="bold" 
+						mouseEnabled="true" verticalAlign="middle"
+						paddingBottom="16" paddingLeft="16" paddingRight="16" paddingTop="16"
+						textAlign.upAndSelected="left" verticalAlign.upAndSelected="middle"/>
+			<s:VGroup height="100%" width="5%" paddingTop="5" paddingRight="5">
+				<assets:Graphics id="graphic31"
+							   includeIn="disabledAndSelected,down,downAndSelected,overAndSelected,up,upAndSelected"
+							   visible.down="false"
+							   buttonMode.overAndSelected="false"
+							   visible.up="false"/>
+			</s:VGroup>
+		</s:HGroup>
+	</s:Group>
+</s:Skin>

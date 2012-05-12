@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark"
+		xmlns:mx="library://ns.adobe.com/flex/mx"
+		title="TestResults"
+		add="view1_addHandler(event)">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	
+<fx:Script>
+	<![CDATA[
+		import mx.collections.ArrayCollection;
+		import mx.events.FlexEvent;
+		
+		[Bindable]
+		public var results:ArrayCollection;
+		
+		protected function view1_addHandler(event:FlexEvent):void
+		{
+			var db:File = File.applicationStorageDirectory.resolvePath("testing.db");
+			var sqlc:SQLConnection = new SQLConnection();
+			var sqls:SQLStatement = new SQLStatement();
+			sqlc.open( db );
+			sqls.sqlConnection = sqlc;
+			sqls.text = "SELECT * FROM testing_table;";
+			sqls.execute();
+			results = new ArrayCollection( sqls.getResult().data );
+		}
+	]]>
+</fx:Script>
+	
+	
+	<s:VGroup width="100%" height="100%">
+		<s:HGroup width="100%">
+			<s:Label text="run" width="10%" />
+			<s:Label text="task" width="60%" />
+			<s:Label text="time" width="30%" />
+		</s:HGroup>
+		<s:List dataProvider="{results}" width="100%" height="100%">
+			<s:itemRenderer>
+				<fx:Component>
+					<mx:HBox width="100%">
+						<mx:Label text="{data.runID}" width="10%" />
+						<mx:Label text="{data.task}" width="60%" />
+						<mx:Label text="{data.time}" width="30%" />
+					</mx:HBox>
+				</fx:Component>
+			</s:itemRenderer>
+		</s:List>
+	</s:VGroup>
+</s:View>

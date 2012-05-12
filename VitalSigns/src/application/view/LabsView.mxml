@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<c:LabsController 
+		xmlns:c="application.controller.*"
+		xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		xmlns:mx="library://ns.adobe.com/flex/mx"
+		xmlns:component="application.component.*"
+		title="Labs" 
+		add="labscontroller_addHandler(event)" >
+	
+	<fx:Declarations>
+		
+	</fx:Declarations>
+	
+	<c:viewMenuItems>
+		<s:ViewMenuItem id="alldata" label="All Data" click="getAllLabs_clickHandler(event)"/>
+		<s:ViewMenuItem id="filterpopup" label="{filterBtnText}" click="getFilteredLabs_clickHandler(event)"/>
+	</c:viewMenuItems>
+	
+	<c:navigationContent>
+			<s:Spacer width="5%"/>
+			<s:Button id="listViewButton" height="35" label="Patient List" 
+					  click="listViewButton_clickHandler(event)"
+					  fontSize="20"/>
+	</c:navigationContent>
+	
+	<c:states>
+		<s:State name="NoData"/>
+		<s:State name="ContainsData"/>
+	</c:states>
+	
+	<s:BusyIndicator id="busyIndicator" verticalCenter="0" horizontalCenter="0" symbolColor="red"/>
+	
+	<s:Scroller width="100%" height="100%">
+		<s:VGroup width="100%" height="100%" verticalAlign="middle">
+			<component:NameLabel id="patientName" text="" />
+			
+			<s:VGroup width="100%" height="100%" paddingTop="2" paddingLeft="2" paddingRight="2" gap="0" includeIn="ContainsData">
+				<mx:VBox width="100%" height="100%">
+					
+					<mx:Repeater id="RepeaterList" width="100%" height="100%" dataProvider="{arrangeList}">
+						<mx:HBox id="DateSeparatorBox" width="100%" styleName="ListHeader" fontSize="24">
+							<s:Label id="LabelDate" text="{RepeaterList.currentItem.separator}:" width="50%" paddingLeft="2" paddingTop="2" verticalAlign="middle"/>
+						</mx:HBox>
+						
+						<s:List dataProvider="{RepeaterList.currentItem.currentList}" width="100%" height="{RepeaterList.currentItem.currentList.length * 36}"
+								horizontalScrollPolicy="off" verticalScrollPolicy="off">
+							<s:itemRenderer>
+								<fx:Component>
+									<component:ListBox width="100%" height="36" borderStyle="solid" horizontalScrollPolicy="off" verticalScrollPolicy="off" 
+													   click="outerDocument.listClickHandler(event)">		
+										<s:Label text="{outerDocument.getTime(data)}" height="100%" width="30%" direction="ltr" verticalAlign="middle"/>
+										<s:Label name="lblAcronym" text="{data.servTypeChildAcro}" height="100%" width="30%" direction="rtl" verticalAlign="middle"/>
+										<s:Label text="{outerDocument.getResult(data)}" height="100%" width="40%"  direction="rtl" verticalAlign="middle"/>	
+									</component:ListBox>
+								</fx:Component>
+							</s:itemRenderer>
+							
+						</s:List>
+						
+					</mx:Repeater>
+				</mx:VBox>
+				
+			</s:VGroup>
+			
+			<s:HGroup horizontalAlign="center" verticalAlign="middle" width="100%" height="100%"  includeIn="NoData">
+				<s:Label id="LabelNoData" text="No Data Available" fontSize="26"/>
+			</s:HGroup>
+
+		</s:VGroup>
+	</s:Scroller>
+	
+</c:LabsController>

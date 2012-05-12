@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<controller:PhotosViewController xmlns:fx="http://ns.adobe.com/mxml/2009"
+								 xmlns:s="library://ns.adobe.com/flex/spark"
+								 xmlns:mx="library://ns.adobe.com/flex/mx"
+								 xmlns:controller="application.controller.notes.*"
+								 title="Photos View"
+								 creationComplete="photosView_creationCompleteHandler(event)"
+								 gestureSwipe="swipe_gestureHandler(event)">
+	<controller:states>
+		<s:State name="photo" />
+		<s:State name="previousAttachments" />
+		<s:State name="newAttachments" />
+	</controller:states>
+	<controller:navigationContent>
+		<s:Button id="cancelBtn" click="cancelBtn_clickHandler(event)" includeIn="newAttachments, photo">
+			<s:icon>
+				<s:MultiDPIBitmapSource source160dpi="application/asset/icon/ic_action_delete_s.png"
+										source240dpi="application/asset/icon/ic_action_delete_m.png"
+										source320dpi="application/asset/icon/ic_action_delete_l.png"/>
+			</s:icon>
+		</s:Button>
+	</controller:navigationContent>
+	<controller:actionContent>
+		<s:Button id="acceptBtn" click="acceptBtn_clickHandler(event)">
+			<s:icon>
+				<s:MultiDPIBitmapSource source160dpi="application/asset/icon/ic_action_done_s.png"
+										source240dpi="application/asset/icon/ic_action_done_m.png"
+										source320dpi="application/asset/icon/ic_action_done_l.png"/>
+			</s:icon>
+		</s:Button>
+	</controller:actionContent>
+	<mx:UIComponent id="ui" width="100%" height="100%" />
+</controller:PhotosViewController>

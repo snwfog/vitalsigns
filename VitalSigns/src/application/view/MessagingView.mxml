@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<controller:MessagingController xmlns:fx="http://ns.adobe.com/mxml/2009" 
+								xmlns:s="library://ns.adobe.com/flex/spark" 
+								xmlns:mx="library://ns.adobe.com/flex/mx"
+								xmlns:component="application.component.*"
+								xmlns:controller="application.controller.*"
+								creationComplete="messagingcontroller_creationCompleteHandler(event)"
+								title="{otherName}">	
+	<controller:states>
+		<s:State name="keyboard_visible" />
+		<s:State name="keyboard_hidden" />
+	</controller:states>
+	
+	<s:VGroup height="100%" width="100%" paddingTop="3" paddingLeft="3" paddingRight="3" paddingBottom="3" gap="0">
+		<s:Scroller horizontalScrollPolicy="off" verticalScrollPolicy="auto" width="100%" height="100%" excludeFrom="keyboard_visible">
+			<s:Group width="100%">
+				<s:List dataProvider="{arrMessages}" verticalScrollPolicy="off" horizontalScrollPolicy="off" width="100%"
+						contentBackgroundColor="0xC5C5C5">
+					<s:itemRenderer>
+						<fx:Component>
+							<mx:VBox width="100%" verticalGap="0">
+								<mx:VBox width="100%" paddingLeft="3" paddingRight="3" paddingTop="3" paddingBottom="3"
+										 borderStyle="solid" styleName="{outerDocument.getCssClass( data )}" verticalGap="0">
+									<mx:HBox width="100%" height="90%" fontSize="{outerDocument.messageFont}">
+										<mx:Text width="100%" text="{data.body}" selectable="false" />
+									</mx:HBox>
+									<mx:HBox height="10%" width="100%">
+										<s:Spacer width="100%" />
+										<s:Label fontSize="{outerDocument.dateFont}" text="{outerDocument.formatTime( data )}" />
+									</mx:HBox>
+								</mx:VBox>
+								<s:Spacer height="{outerDocument.listSpace}" />
+							</mx:VBox>
+						</fx:Component>
+					</s:itemRenderer>
+				</s:List>
+			</s:Group>
+		</s:Scroller>
+		<s:HGroup width="100%" height="20%" paddingLeft="5" paddingRight="5" paddingTop="5" paddingBottom="5" minHeight="200" verticalAlign="middle">					
+			<s:TextArea id="txtMessage" name="txtMessage" width="100%" height="100%"
+						softKeyboardActivating="txtMessage_softKeyboardActivatingHandler(event, txtMessage)" focusOut="txtMessage_focusOutHandler(event)"/>
+			<s:Button id="btnSend" width="65" height="65" icon="@Embed('application/asset/icon/ic_action_send.png')" click="btnSend_clickHandler(event)" />
+		</s:HGroup>
+	</s:VGroup>
+</controller:MessagingController>

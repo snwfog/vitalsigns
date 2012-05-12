@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:SkinnablePopUpContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+						   xmlns:s="library://ns.adobe.com/flex/spark" add="popUpBraden_addHandler(event)">
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<s:layout>
+		<s:VerticalLayout gap="20" horizontalAlign="center"/>
+	</s:layout>
+	
+	<fx:Script>
+		<![CDATA[
+			import application.view.DataEntry;
+			import mx.events.FlexEvent;
+			
+			
+			import spark.components.View;
+			
+			private var _patientId:int;
+			private var _width:int;
+			private var _height:int;
+			
+			[Bindable]
+			public function get patientId():int{
+				return _patientId;
+			}
+			
+			public function set patientId( id:int ):void{
+				_patientId = id;
+			}
+			
+			public function get availWidth():int{
+				return width;
+			}
+			
+			public function set availWidth( w:int ):void{
+				width = w;
+			}
+			
+			public function get availHeight():int{
+				return height;
+			}
+			
+			public function set availHeight( h:int ):void{
+				height = h;
+			}
+			
+			protected function btnYes_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				removeListener();
+				super.close( true, "Yes" );
+			}
+			
+			protected function btnNo_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				removeListener();
+				super.close( true, "No" );
+			}
+			
+			protected function popUpBraden_addHandler(event:FlexEvent):void
+			{
+				VitalSigns.registerOrientationChangeListener( relocate );
+				relocate( parentApplication.stage.width, parentApplication.stage.height );
+				this.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
+				this.setFocus();
+			}
+			
+			protected function removeListener():void{
+				VitalSigns.removeOrientationChangeListener( relocate );
+			}
+			
+			public function relocate( x:int,y:int):void{
+				this.width = x * 0.8;
+				this.height = 70;
+				this.move( ( x - this.width ) / 2, ( y - this.height ) / 2 );
+			}
+			
+			protected function onKeyDown(event:KeyboardEvent):void
+			{
+				if(event.keyCode == Keyboard.BACK)
+				{	
+					event.preventDefault();
+					close();				
+				}
+			}
+			
+		]]>
+	</fx:Script>
+	
+	
+	<s:Group width="100%">
+		<s:Rect width="100%" height="100%">
+			<s:fill>
+				<s:SolidColor color="0xDEDEDE"/>
+			</s:fill>
+		</s:Rect>
+		<s:VGroup width="100%" height="50%" paddingTop="10" paddingBottom="10" paddingLeft="10" paddingRight="10" horizontalAlign="center" gap="10">
+			<s:Label text="One or more of the braden is not specified. Click 'Yes' to specify, 'No' to send all other non-braden data." width="100%" textAlign="center"/>
+			<s:HGroup width="100%" horizontalAlign="center" paddingTop="10" paddingBottom="2">
+				<s:Button label="Yes" width="50%" click="btnYes_clickHandler(event)"/>
+				<s:Button label="No" width="50%" click="btnNo_clickHandler(event)"/>
+			</s:HGroup>
+		</s:VGroup>
+	</s:Group>
+	
+</s:SkinnablePopUpContainer>

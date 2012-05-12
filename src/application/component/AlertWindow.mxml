@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:SkinnablePopUpContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+						   xmlns:s="library://ns.adobe.com/flex/spark"
+						   add="AlertWindow_addHandler(event)" backgroundAlpha="1.0" backgroundColor="0xFFFFFF">
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			private var _width:int;
+			private var _height:int;
+			private var _type:String;
+			private var _message:String;
+			
+			public function get availWidth():int{
+				return width;
+			}
+			
+			public function set availWidth( w:int ):void{
+				width = w;
+			}
+			
+			public function get availHeight():int{
+				return height;
+			}
+			
+			public function set availHeight( h:int ):void{
+				height = h;
+			}
+			
+			[Bindable]public function get message():String{
+				return _message;
+			}
+			
+			public function get errorMsg():String{ return _message; }
+			public function set errorMsg( value:String ):void{ 
+				_message = value;
+				type = "Error";
+			}
+			
+			public function set message( value:String ):void{
+				_message = value;
+			}
+			
+			[Bindable]public function get type():String{
+				return _type;
+			}
+			
+			public function set type( value:String ):void{
+				_type = value;
+			}
+			
+			protected function close_clickHandler(event:MouseEvent):void
+			{
+				VitalSigns.removeOrientationChangeListener( relocate );
+				super.close(true);
+			}
+			
+			public function relocate( x:int, y:int ):void{
+				availWidth = x * 0.8;
+				availHeight = y * 0.5;
+				this.move( ( x - availWidth ) / 2, ( y - availHeight ) / 2 );
+			}
+			
+			protected function AlertWindow_addHandler(event:FlexEvent):void
+			{
+				VitalSigns.registerOrientationChangeListener( relocate );
+				
+				this.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
+				this.setFocus();
+			}
+			
+			protected function onKeyDown(event:KeyboardEvent):void
+			{
+				if(event.keyCode == Keyboard.BACK)
+				{	
+					event.preventDefault();
+					close();				
+				}
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:layout>
+		<s:VerticalLayout gap="20" horizontalAlign="center" />
+	</s:layout>
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<s:Group width="100%" height="100%">
+		<s:Rect radiusX="10" radiusY="10" width="100%" height="100%">
+			<s:fill>
+				<s:SolidColor color="0xDEDEDE"/>
+			</s:fill>
+		</s:Rect>
+		<s:VGroup width="100%" height="100%" paddingTop="10" paddingBottom="10" paddingLeft="10" paddingRight="10" horizontalAlign="center" gap="10">
+			<s:Label text="{type}" fontWeight="bold" width="100%" textAlign="center" color="#A71D1B"/>
+			<s:Label text="{message}" width="100%" fontSize="20"/>
+			<s:HGroup height="100%" width="100%" horizontalAlign="center" paddingTop="10" verticalAlign="bottom">
+				<s:Button label="Close" click="close_clickHandler(event)"/>
+			</s:HGroup>
+		</s:VGroup>
+	</s:Group>
+</s:SkinnablePopUpContainer>

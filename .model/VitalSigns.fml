@@ -1,0 +1,614 @@
+
+<model xmlns="http://ns.adobe.com/Fiber/1.0">
+  <annotation name="ActionScriptGeneration">
+    <item name="FullyQualifyReferences">true</item>
+  </annotation>
+  <service name="VitalSignReg">
+    <annotation name="ActionScriptGeneration">
+      <item name="WSDL-service">VitalSignRegServiceBeanService</item>
+      <item name="ServiceType">WebService</item>
+      <item name="WSDL">http://soen490.dyndns.info:9000/cis-ws/vitalSignReg?wsdl</item>
+      <item name="Package">services.vitalsignreg</item>
+      <item name="WSDL-port">VitalSignRegServiceBeanPort</item>
+    </annotation>
+    <annotation name="ServiceTypeGroup">
+      <item name="ServiceBackendType">WebService</item>
+    </annotation>
+    <annotation name="ServiceConfig">
+      <item name="DEFAULT_ENTITY_PACKAGE">valueObjects</item>
+      <item name="WSDL-endpoint">http://soen490.dyndns.info:9000/cis-ws/vitalSignReg</item>
+      <item name="LINKED_FILE"></item>
+    </annotation>
+    <function name="getUsersInUnit" return-type="UserDTO[]">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="WSDLName">
+        <item name="getUsersInUnit">http://vitalSignReg.cis.muhc.mcgill.ca/,getUsersInUnit</item>
+        <item name="SOAPAction"></item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">string,string,string</item>
+        <item name="returnType">UserDTO</item>
+      </annotation>
+      <parameter name="arg0" type="string"/>
+      <parameter name="arg1" type="string"/>
+      <parameter name="arg2" type="string"/>
+    </function>
+    <function name="getNewMessagesByUser" return-type="MessageDTO[]">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="WSDLName">
+        <item name="SOAPAction"></item>
+        <item name="getNewMessagesByUser">http://vitalSignReg.cis.muhc.mcgill.ca/,getNewMessagesByUser</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">UserDTO</item>
+        <item name="returnType">MessageDTO</item>
+      </annotation>
+      <parameter name="arg0" type="UserDTO"/>
+    </function>
+    <function name="getUserVerifyPassword" return-type="boolean">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="WSDLName">
+        <item name="SOAPAction"></item>
+        <item name="getUserVerifyPassword">http://vitalSignReg.cis.muhc.mcgill.ca/,getUserVerifyPassword</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">string,integer,integer</item>
+        <item name="returnType">boolean</item>
+      </annotation>
+      <parameter name="arg0" type="string"/>
+      <parameter name="arg1" type="integer"/>
+      <parameter name="arg2" type="integer"/>
+    </function>
+    <function name="LoginUser" return-type="boolean">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="WSDLName">
+        <item name="SOAPAction"></item>
+        <item name="LoginUser">http://vitalSignReg.cis.muhc.mcgill.ca/,LoginUser</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">string</item>
+        <item name="returnType">boolean</item>
+      </annotation>
+      <parameter name="arg0" type="string"/>
+    </function>
+    <function name="getImagesByCategory" return-type="ImageDTO[]">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="WSDLName">
+        <item name="SOAPAction"></item>
+        <item name="getImagesByCategory">http://vitalSignReg.cis.muhc.mcgill.ca/,getImagesByCategory</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">string</item>
+        <item name="returnType">ImageDTO</item>
+      </annotation>
+      <parameter name="arg0" type="string"/>
+    </function>
+    <function name="getPatient" return-type="PatientDTO">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="WSDLName">
+        <item name="SOAPAction"></item>
+        <item name="getPatient">http://vitalSignReg.cis.muhc.mcgill.ca/,getPatient</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">long</item>
+        <item name="returnType">PatientDTO</item>
+      </annotation>
+      <parameter name="arg0" type="long"/>
+    </function>
+    <function name="insertNewNote" return-type="boolean">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="WSDLName">
+        <item name="insertNewNote">http://vitalSignReg.cis.muhc.mcgill.ca/,insertNewNote</item>
+        <item name="SOAPAction"></item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">NoteDTO</item>
+        <item name="returnType">boolean</item>
+      </annotation>
+      <parameter name="arg0" type="NoteDTO"/>
+    </function>
+    <function name="getAllNotes" return-type="NoteDTO[]">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="WSDLName">
+        <item name="SOAPAction"></item>
+        <item name="getAllNotes">http://vitalSignReg.cis.muhc.mcgill.ca/,getAllNotes</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">integer</item>
+        <item name="returnType">NoteDTO</item>
+      </annotation>
+      <parameter name="arg0" type="integer"/>
+    </function>
+    <function name="getImagesCategories" return-type="string[]">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="WSDLName">
+        <item name="SOAPAction"></item>
+        <item name="getImagesCategories">http://vitalSignReg.cis.muhc.mcgill.ca/,getImagesCategories</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="returnType">string</item>
+      </annotation>
+    </function>
+    <function name="RegisterUser" return-type="boolean">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="WSDLName">
+        <item name="RegisterUser">http://vitalSignReg.cis.muhc.mcgill.ca/,RegisterUser</item>
+        <item name="SOAPAction"></item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">string,integer,integer</item>
+        <item name="returnType">boolean</item>
+      </annotation>
+      <parameter name="arg0" type="string"/>
+      <parameter name="arg1" type="integer"/>
+      <parameter name="arg2" type="integer"/>
+    </function>
+    <function name="insertVitalSigns" return-type="boolean">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="WSDLCollectionTypes">
+        <item name="arg1"></item>
+      </annotation>
+      <annotation name="WSDLName">
+        <item name="SOAPAction"></item>
+        <item name="insertVitalSigns">http://vitalSignReg.cis.muhc.mcgill.ca/,insertVitalSigns</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">PatientDTO,VitalSignDTO,string</item>
+        <item name="returnType">boolean</item>
+      </annotation>
+      <parameter name="arg0" type="PatientDTO"/>
+      <parameter name="arg1" type="VitalSignDTO[]"/>
+      <parameter name="arg2" type="string"/>
+    </function>
+    <function name="insertBradenScale" return-type="string">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="WSDLName">
+        <item name="SOAPAction"></item>
+        <item name="insertBradenScale">http://vitalSignReg.cis.muhc.mcgill.ca/,insertBradenScale</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">PatientDTO,BradenScaleDTO,string</item>
+        <item name="returnType">string</item>
+      </annotation>
+      <parameter name="arg0" type="PatientDTO"/>
+      <parameter name="arg1" type="BradenScaleDTO"/>
+      <parameter name="arg2" type="string"/>
+    </function>
+    <function name="markConversationAsRead" return-type="boolean">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="WSDLName">
+        <item name="markConversationAsRead">http://vitalSignReg.cis.muhc.mcgill.ca/,markConversationAsRead</item>
+        <item name="SOAPAction"></item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">integer,integer</item>
+        <item name="returnType">boolean</item>
+      </annotation>
+      <parameter name="arg0" type="integer"/>
+      <parameter name="arg1" type="integer"/>
+    </function>
+    <function name="insertNewMemo" return-type="boolean">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="WSDLName">
+        <item name="SOAPAction"></item>
+        <item name="insertNewMemo">http://vitalSignReg.cis.muhc.mcgill.ca/,insertNewMemo</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">string,string</item>
+        <item name="returnType">boolean</item>
+      </annotation>
+      <parameter name="arg0" type="string"/>
+      <parameter name="arg1" type="string"/>
+    </function>
+    <function name="getLabListByType" return-type="LabListDTO[]">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="WSDLName">
+        <item name="SOAPAction"></item>
+        <item name="getLabListByType">http://vitalSignReg.cis.muhc.mcgill.ca/,getLabListByType</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">long,string</item>
+        <item name="returnType">LabListDTO</item>
+      </annotation>
+      <parameter name="arg0" type="long"/>
+      <parameter name="arg1" type="string"/>
+    </function>
+    <function name="getUserImageChallenge" return-type="ImageDTO[]">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="WSDLName">
+        <item name="getUserImageChallenge">http://vitalSignReg.cis.muhc.mcgill.ca/,getUserImageChallenge</item>
+        <item name="SOAPAction"></item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">string</item>
+        <item name="returnType">ImageDTO</item>
+      </annotation>
+      <parameter name="arg0" type="string"/>
+    </function>
+    <function name="insertNewMessage" return-type="integer">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="WSDLName">
+        <item name="insertNewMessage">http://vitalSignReg.cis.muhc.mcgill.ca/,insertNewMessage</item>
+        <item name="SOAPAction"></item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">MessageDTO</item>
+        <item name="returnType">integer</item>
+      </annotation>
+      <parameter name="arg0" type="MessageDTO"/>
+    </function>
+    <function name="insertVitalSignsMySQL" return-type="boolean">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="WSDLCollectionTypes">
+        <item name="arg1"></item>
+      </annotation>
+      <annotation name="WSDLName">
+        <item name="insertVitalSignsMySQL">http://vitalSignReg.cis.muhc.mcgill.ca/,insertVitalSignsMySQL</item>
+        <item name="SOAPAction"></item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">PatientDTO,VitalSignDTO,string</item>
+        <item name="returnType">boolean</item>
+      </annotation>
+      <parameter name="arg0" type="PatientDTO"/>
+      <parameter name="arg1" type="VitalSignDTO[]"/>
+      <parameter name="arg2" type="string"/>
+    </function>
+    <function name="LogoutUser" return-type="boolean">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="WSDLName">
+        <item name="SOAPAction"></item>
+        <item name="LogoutUser">http://vitalSignReg.cis.muhc.mcgill.ca/,LogoutUser</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">string</item>
+        <item name="returnType">boolean</item>
+      </annotation>
+      <parameter name="arg0" type="string"/>
+    </function>
+    <function name="getLabListByTypeByTime" return-type="LabListDTO[]">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="WSDLName">
+        <item name="getLabListByTypeByTime">http://vitalSignReg.cis.muhc.mcgill.ca/,getLabListByTypeByTime</item>
+        <item name="SOAPAction"></item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">long,string,date,date</item>
+        <item name="returnType">LabListDTO</item>
+      </annotation>
+      <parameter name="arg0" type="long"/>
+      <parameter name="arg1" type="string"/>
+      <parameter name="arg2" type="date"/>
+      <parameter name="arg3" type="date"/>
+    </function>
+    <function name="getLabList" return-type="LabListDTO[]">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="WSDLName">
+        <item name="SOAPAction"></item>
+        <item name="getLabList">http://vitalSignReg.cis.muhc.mcgill.ca/,getLabList</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">integer</item>
+        <item name="returnType">LabListDTO</item>
+      </annotation>
+      <parameter name="arg0" type="integer"/>
+    </function>
+    <function name="getAllVitalSigns" return-type="VitalSignDTO[]">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="WSDLName">
+        <item name="getAllVitalSigns">http://vitalSignReg.cis.muhc.mcgill.ca/,getAllVitalSigns</item>
+        <item name="SOAPAction"></item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">long</item>
+        <item name="returnType">VitalSignDTO</item>
+      </annotation>
+      <parameter name="arg0" type="long"/>
+    </function>
+    <function name="getUserIsActivated" return-type="boolean">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="WSDLName">
+        <item name="SOAPAction"></item>
+        <item name="getUserIsActivated">http://vitalSignReg.cis.muhc.mcgill.ca/,getUserIsActivated</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">string</item>
+        <item name="returnType">boolean</item>
+      </annotation>
+      <parameter name="arg0" type="string"/>
+    </function>
+    <function name="GetUserByUsername" return-type="UserDTO">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="WSDLName">
+        <item name="GetUserByUsername">http://vitalSignReg.cis.muhc.mcgill.ca/,GetUserByUsername</item>
+        <item name="SOAPAction"></item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">string</item>
+        <item name="returnType">UserDTO</item>
+      </annotation>
+      <parameter name="arg0" type="string"/>
+    </function>
+    <function name="getVitalSigns" return-type="VitalSignDTO[]">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="WSDLName">
+        <item name="SOAPAction"></item>
+        <item name="getVitalSigns">http://vitalSignReg.cis.muhc.mcgill.ca/,getVitalSigns</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">long,string</item>
+        <item name="returnType">VitalSignDTO</item>
+      </annotation>
+      <parameter name="arg0" type="long"/>
+      <parameter name="arg1" type="string"/>
+    </function>
+    <function name="getAllMessagesByUser" return-type="MessageDTO[]">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="WSDLName">
+        <item name="SOAPAction"></item>
+        <item name="getAllMessagesByUser">http://vitalSignReg.cis.muhc.mcgill.ca/,getAllMessagesByUser</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">UserDTO</item>
+        <item name="returnType">MessageDTO</item>
+      </annotation>
+      <parameter name="arg0" type="UserDTO"/>
+    </function>
+    <function name="getPatients" return-type="PatientDTO[]">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="WSDLName">
+        <item name="getPatients">http://vitalSignReg.cis.muhc.mcgill.ca/,getPatients</item>
+        <item name="SOAPAction"></item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">string,string</item>
+        <item name="returnType">PatientDTO</item>
+      </annotation>
+      <parameter name="arg0" type="string"/>
+      <parameter name="arg1" type="string"/>
+    </function>
+  </service>
+  <entity name="BradenScaleDTO">
+    <annotation name="EntityProperties">
+      <item name="EntityOriginalName">BradenScaleDTO</item>
+    </annotation>
+    <annotation name="service Group">
+      <item name="service">VitalSignReg</item>
+    </annotation>
+    <annotation name="ServerProperties">
+      <item name="IncludeRemoteClass">nonempty</item>
+    </annotation>
+    <annotation name="ActionScriptGeneration">
+      <item name="Package">valueObjects</item>
+    </annotation>
+    <property name="b1SENSRY" type="string"/>
+    <property name="b2MOBLTY" type="string"/>
+    <property name="b3MSTURE" type="string"/>
+    <property name="b4ACTVTY" type="string"/>
+    <property name="b5NUTRTN" type="string"/>
+    <property name="b6FRCTSH" type="string"/>
+  </entity>
+  <entity name="NoteDTO">
+    <annotation name="EntityProperties">
+      <item name="EntityOriginalName">NoteDTO</item>
+    </annotation>
+    <annotation name="service Group">
+      <item name="service">VitalSignReg</item>
+    </annotation>
+    <annotation name="ServerProperties">
+      <item name="IncludeRemoteClass">nonempty</item>
+    </annotation>
+    <annotation name="ActionScriptGeneration">
+      <item name="Package">valueObjects</item>
+    </annotation>
+    <property name="authorID" type="integer"/>
+    <property name="_date" type="date"/>
+    <property name="noteID" type="integer"/>
+    <property name="noteText" type="string"/>
+    <property name="patientID" type="integer"/>
+    <property name="photos" type="ImageDTO[]"/>
+  </entity>
+  <entity name="LabListDTO">
+    <annotation name="EntityProperties">
+      <item name="EntityOriginalName">LabListDTO</item>
+    </annotation>
+    <annotation name="service Group">
+      <item name="service">VitalSignReg</item>
+    </annotation>
+    <annotation name="ServerProperties">
+      <item name="IncludeRemoteClass">nonempty</item>
+    </annotation>
+    <annotation name="ActionScriptGeneration">
+      <item name="Package">valueObjects</item>
+    </annotation>
+    <property name="collectedDate" type="date"/>
+    <property name="encounterID" type="long"/>
+    <property name="fillerNumber" type="string"/>
+    <property name="genLabType" type="string"/>
+    <property name="pid" type="long"/>
+    <property name="rangeIndicator" type="string"/>
+    <property name="rangeReference" type="string"/>
+    <property name="result" type="string"/>
+    <property name="resultDate" type="date"/>
+    <property name="resultUnit" type="string"/>
+    <property name="servTypeChildAcro" type="string"/>
+    <property name="servTypeChildLongDesc" type="string"/>
+    <property name="servTypeRootAcro" type="string"/>
+    <property name="sid" type="long"/>
+    <property name="sortChildSeq" type="string"/>
+    <property name="state" type="string"/>
+  </entity>
+  <entity name="PatientDTO">
+    <annotation name="EntityProperties">
+      <item name="EntityOriginalName">PatientDTO</item>
+    </annotation>
+    <annotation name="service Group">
+      <item name="service">VitalSignReg</item>
+    </annotation>
+    <annotation name="ServerProperties">
+      <item name="IncludeRemoteClass">nonempty</item>
+    </annotation>
+    <annotation name="ActionScriptGeneration">
+      <item name="Package">valueObjects</item>
+    </annotation>
+    <property name="address" type="string"/>
+    <property name="bed" type="string"/>
+    <property name="birthDate" type="date"/>
+    <property name="city" type="string"/>
+    <property name="doctor" type="string"/>
+    <property name="doctorTel" type="string"/>
+    <property name="enFillerNum" type="string"/>
+    <property name="encounterId" type="long"/>
+    <property name="extAppId" type="string"/>
+    <property name="firstName" type="string"/>
+    <property name="height" type="float"/>
+    <property name="heightUnit" type="string"/>
+    <property name="lastName" type="string"/>
+    <property name="mrn" type="string"/>
+    <property name="nursingUnit" type="string"/>
+    <property name="patientId" type="long"/>
+    <property name="postalCode" type="string"/>
+    <property name="province" type="string"/>
+    <property name="readOnly" type="boolean"/>
+    <property name="sexCd" type="string"/>
+    <property name="weight" type="float"/>
+    <property name="weightUnit" type="string"/>
+  </entity>
+  <entity name="UserDTO">
+    <annotation name="EntityProperties">
+      <item name="EntityOriginalName">UserDTO</item>
+    </annotation>
+    <annotation name="service Group">
+      <item name="service">VitalSignReg</item>
+    </annotation>
+    <annotation name="ServerProperties">
+      <item name="IncludeRemoteClass">nonempty</item>
+    </annotation>
+    <annotation name="ActionScriptGeneration">
+      <item name="Package">valueObjects</item>
+    </annotation>
+    <property name="firstName" type="string"/>
+    <property name="lastName" type="string"/>
+    <property name="memo" type="string"/>
+    <property name="nullPassword" type="boolean"/>
+    <property name="userId" type="integer"/>
+    <property name="username" type="string"/>
+  </entity>
+  <entity name="VitalSignDTO">
+    <annotation name="EntityProperties">
+      <item name="EntityOriginalName">VitalSignDTO</item>
+    </annotation>
+    <annotation name="service Group">
+      <item name="service">VitalSignReg</item>
+    </annotation>
+    <annotation name="ServerProperties">
+      <item name="IncludeRemoteClass">nonempty</item>
+    </annotation>
+    <annotation name="ActionScriptGeneration">
+      <item name="Package">valueObjects</item>
+    </annotation>
+    <property name="alert" type="boolean"/>
+    <property name="description" type="string"/>
+    <property name="lastChgDtm" type="date"/>
+    <property name="method" type="string"/>
+    <property name="position" type="string"/>
+    <property name="sid" type="long"/>
+    <property name="site" type="string"/>
+    <property name="type" type="string"/>
+    <property name="unit" type="string"/>
+    <property name="value" type="string"/>
+  </entity>
+  <entity name="MessageDTO">
+    <annotation name="EntityProperties">
+      <item name="EntityOriginalName">MessageDTO</item>
+    </annotation>
+    <annotation name="service Group">
+      <item name="service">VitalSignReg</item>
+    </annotation>
+    <annotation name="ServerProperties">
+      <item name="IncludeRemoteClass">nonempty</item>
+    </annotation>
+    <annotation name="ActionScriptGeneration">
+      <item name="Package">valueObjects</item>
+    </annotation>
+    <property name="authorid" type="integer"/>
+    <property name="body" type="string"/>
+    <property name="conversationid" type="integer"/>
+    <property name="created" type="date"/>
+    <property name="isNew" type="boolean"/>
+    <property name="messageid" type="integer"/>
+    <property name="recipientid" type="integer"/>
+  </entity>
+  <entity name="ImageDTO">
+    <annotation name="EntityProperties">
+      <item name="EntityOriginalName">ImageDTO</item>
+    </annotation>
+    <annotation name="service Group">
+      <item name="service">VitalSignReg</item>
+    </annotation>
+    <annotation name="ServerProperties">
+      <item name="IncludeRemoteClass">nonempty</item>
+    </annotation>
+    <annotation name="ActionScriptGeneration">
+      <item name="Package">valueObjects</item>
+    </annotation>
+    <property name="category" type="string"/>
+    <property name="image" type="blob"/>
+    <property name="imageId" type="integer"/>
+    <property name="originalName" type="string"/>
+  </entity>
+</model>

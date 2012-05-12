@@ -1,0 +1,131 @@
+/* CSS file */
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace components "components.*";
+@namespace mx "library://ns.adobe.com/flex/mx";
+
+global
+{
+	chromeColor: #DEDEDE;
+	modalTransparency: 0.7;
+	modalTransparencyBlur: 2;
+	modalTransparencyColor : #323232;
+}
+
+s|ActionBar {
+	color:#FFFFFF;
+	fontSize:24;
+	paddingBottom: 3;
+	paddingTop: 3;
+	paddingLeft: 3;
+	paddingRight: 3;
+	titleAlign: center; 
+	chromeColor: #A1A1A1;
+	defaultButtonAppearance: beveled;
+}
+
+s|ActionBar.beveled s|Group#navigationGroup s|Button
+{
+	skinClass: ClassReference("spark.skins.mobile.BeveledActionButtonSkin");
+}
+
+
+s|Button{
+	chromeColor: #990000;
+	color: #FFFFFF;
+}
+
+s|ViewMenu {
+	skinClass: ClassReference("application.skins.MyViewMenuSkin");
+} 
+
+s|View{
+	backgroundColor: #C5C5C5;	
+}
+mx|AxisRenderer {
+	vertical-axis-title-alignment:vertical;
+} 
+
+mx|LineChart {
+	axis-title-style-name:axistitle;
+	padding-bottom:15;
+	padding-left:15;
+	padding-right:15;
+	padding-top:15;
+	color:#000000;
+	show-data-tip-targets:null;
+}
+
+mx|PlotChart{
+	axis-title-style-name:axistitle;
+	padding-bottom:15;
+	padding-left:15;
+	padding-right:15;
+	padding-top:15;
+	color:#000000;
+	show-data-tip-targets:null;
+} 
+
+.summaryValue{
+	color:#A71D1B;	
+}
+
+.axistitle{
+	font-size:15px;
+	font-weight:bold;
+	color: #4A4A4A;
+}
+
+.v1{
+	font-size:12px;
+	color: #FF0000;
+}
+.v2{
+	font-size:12px;
+	color: #0000ff;
+}
+.v3{
+	font-size:12px;
+	color: #FFff00;
+}
+
+
+.formRow s|Label{
+	fontSize: 26;
+	fontWeight: bold;
+}
+
+.listBoxSelecting{
+	backgroundColor: #990000;
+}
+
+
+.labelStatic{
+	fontWeight: bold;
+	
+}
+
+/*  Data Entry button styling   */
+
+.entryType{
+	fontWeight: bold;
+	fontSize: 26;
+	textShadowColor: #333333;
+	textShadowAlpha: 0.5;
+}
+
+/*  End Data Entry button styling */
+
+
+/* conversation colors */
+
+.user_color
+{
+	backgroundColor: #F89494;
+}
+.other_color
+{
+	background-color: #FFFFFF;
+}
+
+/* end conversation colors */
+

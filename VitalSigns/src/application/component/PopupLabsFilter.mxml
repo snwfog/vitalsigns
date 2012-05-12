@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:SkinnablePopUpContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+						   xmlns:s="library://ns.adobe.com/flex/spark" add="popUpLabs_addHandler(event)">
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<s:layout>
+		<s:VerticalLayout gap="20" horizontalAlign="center"/>
+	</s:layout>
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			import mx.events.FlexMouseEvent;
+			import application.controller.LabsController;
+			import spark.components.View;
+			
+			private var _width:int;
+			private var _height:int;
+			
+			protected function btnGetFilteredLabs_clickHandler(event:MouseEvent):void
+			{
+				removeListener();
+				super.close( true, acrTxt.text );
+			}
+			
+			
+			public function get availWidth():int{
+				return width;
+			}
+			
+			public function set availWidth( w:int ):void{
+				width = w;
+			}
+			
+			public function get availHeight():int{
+				return height;
+			}
+			
+			public function set availHeight( h:int ):void{
+				height = h;
+			}
+			
+			
+			
+			protected function popUpLabs_addHandler(event:FlexEvent):void
+			{
+				VitalSigns.registerOrientationChangeListener( relocate );
+				relocate( parentApplication.stage.width,parentApplication.stage.height );
+				
+				this.addEventListener(FlexMouseEvent.MOUSE_DOWN_OUTSIDE,this.close)
+			}
+			
+			protected function removeListener():void{
+				VitalSigns.removeOrientationChangeListener( relocate );
+			}
+			
+			public function relocate( x:int,y:int):void{
+				this.width = x * 0.8;
+				this.height = 167;
+				this.move( ( x - this.width ) / 2, ( y - this.height ) / 2 );
+			}
+
+		]]>
+	</fx:Script>
+	
+	
+	<s:Group width="100%" >
+		<s:Rect width="100%" height="100%">
+			<s:fill>
+				<s:SolidColor color="0xDEDEDE"/>
+			</s:fill>
+		</s:Rect>
+		<s:VGroup width="100%" height="50%" paddingTop="10" paddingBottom="10" paddingLeft="10" paddingRight="10" horizontalAlign="center" gap="10">
+
+			<s:HGroup width="100%" horizontalAlign="left" paddingTop="2">
+				<s:Label text="Enter acronym to filter:" width="100%" textAlign="left" paddingLeft="2"/>
+			</s:HGroup>
+			<s:HGroup width="100%" paddingTop="2">
+				<s:TextInput id="acrTxt" height="48" needsSoftKeyboard="true"/>
+			</s:HGroup>
+			<s:HGroup width="100%" horizontalAlign="center" paddingTop="2">
+				<s:Button id="btnGetFilteredLabs" height="48" label="Filter"
+						  click="btnGetFilteredLabs_clickHandler(event)"/>
+			</s:HGroup>
+		</s:VGroup>
+	</s:Group>
+	
+</s:SkinnablePopUpContainer>

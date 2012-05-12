@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<c:AccountRegistrationController
+		xmlns:fx="http://ns.adobe.com/mxml/2009"
+		xmlns:c="application.controller.AccountRegistration.*"
+		xmlns:s="library://ns.adobe.com/flex/spark"
+		title="Account Registration"
+		add="AccountRegistrationView_addHandler(event)">
+	
+	
+	<fx:Declarations>
+		<s:SolidColor id="formRowFill" color="0xFFFFFF" />
+	</fx:Declarations>
+	
+	<s:VGroup width="100%" height="100%" paddingTop="3" paddingBottom="3" paddingRight="3" paddingLeft="3" gap="20">
+		<s:Spacer height="5%" />
+		<s:VGroup styleName="formRow" gap="0" width="100%">
+			<s:Label text="Username:" width="100%" />
+			<s:Group width="100%">
+				<s:Rect width="100%" height="100%" radiusX="8" fill="{formRowFill}" />
+				<s:HGroup width="100%" height="100%" paddingLeft="5" paddingTop="5" paddingRight="5" paddingBottom="5">
+					<s:TextInput width="100%" name="userName" id="userName" enabled="false" />
+				</s:HGroup>
+			</s:Group>
+		</s:VGroup>
+		<s:VGroup id="grpStartActivation" styleName="formRow" gap="0" width="100%">
+			<s:Button id="btnPasswordSelect" label="Select Images" width="100%" click="btnPasswordSelect_clickHandler(event)" />
+		</s:VGroup>
+		<s:VGroup id="grpConfirmActivation" styleName="formRow" gap="0" width="100%" visible="false">
+			<s:HGroup width="100%">
+				<s:List dataProvider="{images}" itemRenderer="application.component.ImagePassword" borderVisible="false">
+					<s:layout>
+						<s:HorizontalLayout requestedColumnCount="{VitalSigns.iPasswordLength}" horizontalAlign="center" />
+					</s:layout>
+				</s:List>
+			</s:HGroup>
+			<s:Button id="btnActivate" label="Activate Account" width="100%" click="btnActivate_clickHandler(event)" />
+		</s:VGroup>
+		<s:VGroup id="grpResetActivation" styleName="formRow" gap="0" width="100%" visible="false">
+			<s:Button id="btnReset" label="Reset Activation" width="100%" click="btnReset_clickHandler(event)" />
+		</s:VGroup>
+	</s:VGroup>
+	
+</c:AccountRegistrationController>

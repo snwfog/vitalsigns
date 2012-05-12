@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<c:DataEntryController
+		xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark"
+		xmlns:mx="library://ns.adobe.com/flex/mx"
+		title="Data Entry"
+		xmlns:c="application.controller.*"
+		xmlns:entry="application.view.*"
+		add="dataentry_addHandler(event)" xmlns:component="application.component.*">
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<s:WebService id="vitalSignService" fault="vitalSignService_faultHandler(event)"
+					  result="vitalSignService_resultHandler(event)" showBusyCursor="true" />
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			[Bindable]public var btnWidth:int = 220;
+			
+			protected function dataentry_addHandler(event:FlexEvent):void
+			{
+				var width:int = 480 - 12;
+				btnWidth = width * 0.48;
+				var columns:int = 2;
+				
+				var remaining:Number = width - ( btnWidth * columns );
+				layoutEntries.horizontalGap = (remaining / ( columns - 1 ) );
+				
+				dataentrycontroller_addHandler(event);
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<c:viewMenuItems>
+		<s:ViewMenuItem id="resources" label="Resources" click="resources_clickHandler(event)"/>
+		<s:ViewMenuItem id="dataentryold" label="DataEntry" click="navigator.pushView(DataEntry)"/>
+	</c:viewMenuItems>
+	
+	<c:actionContent>
+		<s:Button id="submitBtn" label="Submit" click="submitBtn_clickHandler(event)"/>
+	</c:actionContent>
+	<c:navigationContent>
+		<s:Button id="cancelBtn" label="Cancel" click="cancelBtn_clickHandler(event)"/>
+	</c:navigationContent>
+	
+	<s:Scroller width="100%" height="100%" verticalScrollPolicy="on">
+		
+	
+	<s:VGroup width="100%" height="100%" paddingLeft="6" paddingRight="6" paddingTop="6" gap="10">
+		<s:List id="lstTypes" dataProvider="{arrEntries}" width="100%" borderVisible="false" verticalScrollPolicy="off"
+				contentBackgroundColor="0xC5C5C5">
+			<s:layout>
+				<s:TileLayout id="layoutEntries" requestedColumnCount="2" columnWidth="{btnWidth}" rowHeight="{ btnWidth / 1.5 }" horizontalGap="10" />
+			</s:layout>
+			<s:itemRenderer>
+				<fx:Component>
+					<component:DataEntryControl title="{data}" mouseUp="outerDocument.listClickHandler(event)" />
+				</fx:Component>
+			</s:itemRenderer>
+		</s:List>
+		<s:Line width="100%">
+			<s:stroke>
+				<s:SolidColorStroke color="#000000" weight="2"/>		
+			</s:stroke>		
+		</s:Line>
+		<s:HGroup>
+			<s:Label id="lblPain" styleName="labelStatic" text="Pain Scale:" />
+			<s:Label id="painVal" text="{painSlider.value}" />
+		</s:HGroup>
+		<s:HSlider id="painSlider" width="100%" 
+				   changeEnd="slider_changeEndHandler(event)"
+				   changeStart="slider_changeStartHandler(event)"
+				   maximum="10" minimum="1" value="{DataEntryController.painPoint}"/>
+		
+		<s:HGroup>
+			<s:Label fontSize="18" fontWeight="bold" text="Sensory:"
+					 verticalAlign="middle" textAlign="left"/>
+			<s:Label fontSize="18" fontWeight="bold" 
+					 id="sensoryLbl" color="#990000"  text="{DataEntryController.sensoryText}"/>
+		</s:HGroup>
+		<s:ButtonBar width="100%" height="40" color="#FFFFFF" fontSize="17" chromeColor="#A71D1B"
+					 fontStyle="normal" fontWeight="bold" requireSelection="false"
+					 textAlign="center" id="sensoryBB" change="sensoryBB_changeHandler(event)">
+			<s:ArrayCollection>
+				<fx:String>1</fx:String>
+				<fx:String>2</fx:String>
+				<fx:String>3</fx:String>
+				<fx:String>4</fx:String>
+			</s:ArrayCollection> 
+		</s:ButtonBar>
+		
+		<s:Spacer height="4" />
+		
+		<s:HGroup width="100%">
+			<s:Label fontSize="18" fontWeight="bold"
+					 text="Mobility:" textAlign="left" verticalAlign="middle"/>
+			<s:Label fontSize="18" fontWeight="bold" 
+					 id="mobilityLbl" color="#990000" text="{DataEntryController.mobilityText}"/>
+		</s:HGroup>
+		<s:ButtonBar width="100%" height="40" color="#FFFFFF" fontSize="17" chromeColor="#A71D1B"
+					 fontStyle="normal" fontWeight="bold" requireSelection="false"
+					 textAlign="center" id="mobilityBB" change="mobilityBB_changeHandler(event)"
+					 >
+			<s:ArrayCollection>
+				<fx:String>1</fx:String>
+				<fx:String>2</fx:String>
+				<fx:String>3</fx:String>
+				<fx:String>4</fx:String>
+			</s:ArrayCollection> 
+		</s:ButtonBar>
+		
+		<s:Spacer height="4" />
+		
+		<s:HGroup>
+			<s:Label fontSize="18" fontWeight="bold" text="Moisture:"
+					 textAlign="left" verticalAlign="middle"/>
+			<s:Label fontSize="18" fontWeight="bold" 
+					 id="moistureLbl" color="#990000" text="{DataEntryController.moistureText}"/>
+		</s:HGroup>
+		<s:ButtonBar width="100%" height="40" color="#FFFFFF" fontSize="17" chromeColor="#A71D1B"
+					 fontStyle="normal" fontWeight="bold" requireSelection="false"
+					 textAlign="center" id="moistureBB" change="moistureBB_changeHandler(event)"
+					 >
+			<s:ArrayCollection>
+				<fx:String>1</fx:String>
+				<fx:String>2</fx:String>
+				<fx:String>3</fx:String>
+				<fx:String>4</fx:String>
+			</s:ArrayCollection> 
+		</s:ButtonBar>
+		
+		<s:Spacer height="4" />
+		
+		<s:HGroup>
+			<s:Label fontSize="18" fontWeight="bold" text="Activity:"
+					 textAlign="left" verticalAlign="middle"/>
+			<s:Label fontSize="18" fontWeight="bold" 
+					 id="activityLbl" color="#990000" text="{DataEntryController.activityText}"/>
+		</s:HGroup>
+		<s:ButtonBar width="100%" height="40" color="#FFFFFF" fontSize="17" chromeColor="#A71D1B"
+					 fontStyle="normal" fontWeight="bold" requireSelection="false"
+					 textAlign="center" id="activityBB" change="activityBB_changeHandler(event)"
+					 >
+			<s:ArrayCollection>
+				<fx:String>1</fx:String>
+				<fx:String>2</fx:String>
+				<fx:String>3</fx:String>
+				<fx:String>4</fx:String>
+			</s:ArrayCollection> 
+		</s:ButtonBar>
+		
+		<s:Spacer height="4" />
+		
+		<s:HGroup>
+			<s:Label fontSize="18" fontWeight="bold" text="Nutrition:" 
+					 textAlign="left" verticalAlign="middle"/>
+			<s:Label fontSize="18" fontWeight="bold" 
+					 id="nutritionLbl" color="#990000" text="{DataEntryController.nutritionText}"/>
+		</s:HGroup>
+		<s:ButtonBar width="100%" height="40" color="#FFFFFF" fontSize="17" chromeColor="#A71D1B"
+					 fontStyle="normal" fontWeight="bold" requireSelection="false"
+					 textAlign="center" id="nutritionBB" change="nutritionBB_changeHandler(event)"
+					 >
+			<s:ArrayCollection>
+				<fx:String>1</fx:String>
+				<fx:String>2</fx:String>
+				<fx:String>3</fx:String>
+				<fx:String>4</fx:String>
+			</s:ArrayCollection> 
+		</s:ButtonBar>
+		
+		<s:Spacer height="4" />
+		
+		<s:HGroup>
+			<s:Label fontSize="18" fontWeight="bold" text="Friction:"
+					 textAlign="left" verticalAlign="middle"/>
+			<s:Label fontSize="18" fontWeight="bold" 
+					 id="frictionLbl" color="#990000" text="{DataEntryController.frictionText}"/>
+		</s:HGroup>
+		<s:ButtonBar width="100%" height="40" color="#FFFFFF" fontSize="17" chromeColor="#A71D1B"
+					 fontStyle="normal" fontWeight="bold" requireSelection="false"
+					 textAlign="center" id="frictionBB" change="frictionBB_changeHandler(event)"
+					 >
+			<s:ArrayCollection>
+				<fx:String>1</fx:String>
+				<fx:String>2</fx:String>
+				<fx:String>3</fx:String>
+			</s:ArrayCollection> 
+		</s:ButtonBar>
+		
+		
+	</s:VGroup>
+	</s:Scroller>
+</c:DataEntryController>

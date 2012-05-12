@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<controller:ChartController xmlns:fx="http://ns.adobe.com/mxml/2009"
+							xmlns:mx="library://ns.adobe.com/flex/mx"
+							xmlns:s="library://ns.adobe.com/flex/spark" 
+							xmlns:controller="application.controller.chart.*"
+							xmlns:components="application.component.*"
+							creationComplete="chartcontroller_creationcompleteHandler(event)"
+							title="{patient_name}" 
+							xmlns:view="application.view.*">
+	<fx:Declarations>
+		<!--blue-->
+		<s:SolidColor id="sc1" alpha=".8" color="#0000ff"/>
+		<s:SolidColorStroke id="scs1" color="#0000ff" weight="1"/>
+		<!--red-->
+		<s:SolidColor id="sc2" alpha=".8" color="#ff0000"/>
+		<s:SolidColorStroke id="scs2" color="#ff0000" weight="1"/>
+		<!--blue-->
+		<s:SolidColor id="sc3" alpha=".8" color="#0000ff"/>
+		<s:SolidColorStroke id="scs3" color="#0000ff" weight="1"/>
+		<!--yellow-->
+		<s:SolidColor id="sc4" alpha=".8" color="#ffff00"/>
+		<s:SolidColorStroke id="scs4" color="#ffff00" weight="1"/>
+		
+		<mx:DateFormatter id="dateFormatter" formatString="MM-DD"/>
+		<mx:DateFormatter id="timeFormatter" formatString="JJ:NN A"/>
+		
+		<s:SolidColorStroke id="border" alpha=".8" color="#969696" weight="2"/>
+		<s:SolidColorStroke id="grid" alpha="1" color="#d7d7d7" weight="1"/>
+	</fx:Declarations>
+	
+	<controller:states>
+		<s:State name="rawdata" />
+		<s:State name="defaultChart" />
+		<s:State name="heartChart" />
+		<s:State name="oxygenChart" />
+	</controller:states>
+	
+	<!--<controller:navigationContent>
+		<s:Button id="summaryBtn" label="Summary" click="summaryBtn_clickHandler(event)"/>
+	</controller:navigationContent>-->
+	<s:VGroup width="100%" height="100%" gap="0" horizontalAlign="center">
+		<components:NameLabel text="{chart_type}"/>
+		
+		<s:VGroup height="95%" width="100%" paddingLeft="3" paddingRight="3" paddingTop="3" paddingBottom="3" includeIn="rawdata">
+			<s:Scroller width="100%" height="100%" verticalScrollPolicy="auto">
+				<s:HGroup width="100%" height="100%" gap="0">
+					<s:List id="lstRawData" width="100%" dataProvider="{arrRawData}" itemRendererFunction="selectItemRenderer"
+							verticalScrollPolicy="off" horizontalScrollPolicy="off"></s:List>
+				</s:HGroup>
+			</s:Scroller>
+		</s:VGroup>
+		<!-- default chart -->
+		<s:Group width="100%" height="100%" includeIn="defaultChart">
+			<mx:LineChart id="lineChartAxisDefault" width="100%" height="100%" dataProvider="null"
+						  gutterBottom="50" gutterLeft="70" paddingLeft="0" paddingRight="0">
+				<mx:horizontalAxis>
+					<mx:CategoryAxis id="h2"/>
+				</mx:horizontalAxis>
+				
+				<mx:horizontalAxisRenderers>
+					<mx:AxisRenderer axis="{h2}" axisStroke="{border}" showLabels="false"
+									 showLine="true" tickPlacement="none"/>
+				</mx:horizontalAxisRenderers>
+				
+				<mx:verticalAxis>
+					<mx:LinearAxis id="v2" interval="1" maximum="{verticalmax}" minimum="{verticalmin}" title="{getDisplayName()}"/>
+				</mx:verticalAxis>
+				
+				<mx:verticalAxisRenderers>
+					<mx:AxisRenderer axis="{v2}" axisStroke="{border}"/>
+				</mx:verticalAxisRenderers>
+			</mx:LineChart>
+			
+			<mx:Canvas id="box" x="70" y="0" width="100%" height="100%" horizontalScrollPolicy="off"
+					   verticalScrollPolicy="off"> 
+				<mx:LineChart id="lineChartDefault" width="100%" height="100%" backgroundElements="[]"
+							  clipContent="false" dataProvider="{lstChart}" gutterBottom="50"
+							  gutterLeft="0" paddingLeft="0" seriesFilters="[]" showDataTips="false">
+					
+					<mx:horizontalAxis>
+						<mx:CategoryAxis id="hTemp" categoryField="lastChgDtm"
+										 labelFunction="categoryAxis_labelFunc"/>
+					</mx:horizontalAxis>
+					
+					<mx:horizontalAxisRenderers>
+						<mx:AxisRenderer axis="{hTemp}" axisStroke="{border}"
+										 canDropLabels="true"/>
+					</mx:horizontalAxisRenderers>
+					
+					<mx:verticalAxis>
+						<mx:LinearAxis id="vTemp" interval="{getInterval()}" maximum="{verticalmax}" minimum="{verticalmin}" />
+					</mx:verticalAxis>
+					
+					<mx:verticalAxisRenderers>
+						<mx:AxisRenderer axis="{vTemp}" axisStroke="{border}" showLabels="false"
+										 showLine="false" tickPlacement="none"/>
+					</mx:verticalAxisRenderers>
+					
+					<mx:series>
+						<mx:LineSeries id="series" displayName="{getDisplayName()}" fill="{sc2}"
+									   interpolateValues="false" lineStroke="{scs2}" stroke="{scs2}"
+									   xField="lastChgDtm" yField="value" itemRenderer="mx.charts.renderers.CircleItemRenderer">
+						</mx:LineSeries>
+					</mx:series>
+				</mx:LineChart>
+			</mx:Canvas>
+		</s:Group>
+		
+		<!-- heart chart -->
+		<s:VGroup width="100%" height="100%" gap="0" includeIn="heartChart">
+			<s:Group width="100%" height="100%"> 
+				<mx:PlotChart id="lineChartAxisHeart" width="100%" height="100%" dataProvider="null"
+							  gutterBottom="50" gutterLeft="70" paddingLeft="0" paddingRight="0">
+					<mx:horizontalAxis>
+						<mx:CategoryAxis id="h1"/>
+					</mx:horizontalAxis>
+					
+					<mx:horizontalAxisRenderers>
+						<mx:AxisRenderer axis="{h1}" axisStroke="{border}" showLabels="false" showLine="true" tickPlacement="none"/>
+					</mx:horizontalAxisRenderers>
+					
+					<mx:verticalAxis>
+						<mx:LinearAxis id="v1" interval="15" maximum="{verticalmax}" minimum="{verticalmin}"
+									   title="HR/BP"/>
+					</mx:verticalAxis>
+					
+					<mx:verticalAxisRenderers>
+						<mx:AxisRenderer axis="{v1}" axisStroke="{border}"/>
+					</mx:verticalAxisRenderers>
+				</mx:PlotChart>
+				
+				<mx:Canvas id="boxheart" x="70" y="0" width="100%" height="100%"
+						   horizontalScrollPolicy="off" verticalScrollPolicy="off"> 
+					<mx:PlotChart id="linechart1" width="100%" height="100%"
+								  backgroundElements="[]" clipContent="false"
+								  dataProvider="{lstChart}" gutterBottom="50" gutterLeft="0" paddingLeft="0"
+								  seriesFilters="[]" showDataTips="false">
+						
+						<mx:horizontalAxis>
+							<mx:CategoryAxis id="h" categoryField="lastChgDtm"
+											 labelFunction="categoryAxis_labelFunc"/>
+						</mx:horizontalAxis>
+						
+						<mx:horizontalAxisRenderers>
+							<mx:AxisRenderer axis="{h}" axisStroke="{border}"
+											 canDropLabels="true"/>
+						</mx:horizontalAxisRenderers>
+						
+						<mx:verticalAxis>
+							<mx:LinearAxis id="v" interval="15" maximum="{verticalmax}" minimum="{verticalmin}" />
+						</mx:verticalAxis>
+						
+						<mx:verticalAxisRenderers>
+							<mx:AxisRenderer axis="{v}" axisStroke="{border}" showLabels="false"
+											 showLine="false" tickPlacement="none"/>
+						</mx:verticalAxisRenderers>
+						
+						<mx:series>
+							<mx:LineSeries id="lineseries" dataProvider="{lineData}" fill="{sc4}"
+										   form="vertical" lineStroke="{scs4}" stroke="{scs4}"
+										   xField="date" yField="datay" />
+							
+							<mx:PlotSeries id="series1" displayName="Systolic" fill="{sc1}"
+										   stroke="{scs1}" xField="lastChgDtm" yField="systolic" itemRenderer="application.component.TriangleRenderer">
+							</mx:PlotSeries>
+							<mx:PlotSeries id="series2" displayName="Rate" fill="{sc2}"
+										   stroke="{scs2}" xField="lastChgDtm" yField="rate" itemRenderer="mx.charts.renderers.CircleItemRenderer">
+								
+							</mx:PlotSeries>
+							<mx:PlotSeries id="series3" displayName="Diastolic" fill="{sc3}"
+										   stroke="{scs3}" xField="lastChgDtm" yField="diastolic" itemRenderer="mx.charts.renderers.TriangleItemRenderer">
+							</mx:PlotSeries>
+						</mx:series>			
+					</mx:PlotChart>
+				</mx:Canvas>
+			</s:Group>
+		</s:VGroup>
+		
+		<!-- Oxygen chart -->
+		
+		<s:Group width="100%" height="100%" includeIn="oxygenChart"> 
+			<mx:LineChart id="O2lineChartAxis" width="100%" height="100%"
+						  gutterBottom="50" gutterLeft="65" paddingLeft="0" gutterRight="65" paddingRight="0">
+				<mx:horizontalAxis>
+					<mx:CategoryAxis id="ha1" />
+				</mx:horizontalAxis>
+				
+				<mx:horizontalAxisRenderers>
+					<mx:AxisRenderer axis="{ha1}" axisStroke="{border}" showLabels="false" tickPlacement="none"/>
+				</mx:horizontalAxisRenderers>
+				
+				<mx:verticalAxisRenderers>
+					<mx:AxisRenderer axis="{va1}" axisStroke="{border}" axisTitleStyleName="v1"/>
+					<mx:AxisRenderer axis="{va3}" axisStroke="{border}" placement="right" axisTitleStyleName="v3"/>
+				</mx:verticalAxisRenderers>
+				
+				<mx:series>
+					<mx:LineSeries>
+						<mx:verticalAxis>
+							<mx:LinearAxis id="va1" title="O2 Saturation(%)" maximum="{maxSat}" minimum="{minSat}" interval="1.0"/>
+						</mx:verticalAxis>
+					</mx:LineSeries>			
+					<mx:LineSeries>
+						<mx:verticalAxis> 
+							<mx:LinearAxis id="va3" title="Oxygen(%)" maximum="{maxO2}" minimum="{minO2}" interval="1.0"/>
+						</mx:verticalAxis>
+					</mx:LineSeries>
+				</mx:series>
+				
+			</mx:LineChart>
+			
+			<mx:Canvas id="oxygenbox" width="100%" height="100%" left="65" right="115" y="0" 
+					   verticalScrollPolicy="off" horizontalScrollPolicy="off"> 
+				<mx:LineChart id="O2linechart1" width="100%" height="100%"
+							  gutterBottom="50" gutterLeft="0" paddingLeft="0" backgroundElements="[]"
+							  seriesFilters="[]" showDataTips="false" clipContent="false"
+							  dataProvider="{lstChart}">
+					
+					<mx:horizontalAxis>
+						<mx:CategoryAxis id="hO2" labelFunction="categoryAxis_labelFunc" categoryField="lastChgDtm" />
+					</mx:horizontalAxis>
+					
+					<mx:horizontalAxisRenderers>
+						<mx:AxisRenderer axis="{hO2}" axisStroke="{border}" canDropLabels="true"/>
+					</mx:horizontalAxisRenderers>
+					
+					<mx:verticalAxisRenderers>
+						<mx:AxisRenderer axis="{O2v1}" showLabels="false" showLine="false" tickPlacement="none" />
+						<mx:AxisRenderer axis="{O2v2}" showLabels="false" showLine="false" tickPlacement="none"/>
+					</mx:verticalAxisRenderers>
+					
+					<mx:series>
+						<mx:LineSeries id="O2series1" displayName="O2 Saturation(%)" yField="oxygen" xField="lastChgDtm"
+									   stroke="{scs2}" fill="{sc2}" lineStroke="{scs2}" itemRenderer="mx.charts.renderers.CircleItemRenderer">
+							<mx:verticalAxis>
+								<mx:LinearAxis id="O2v1" maximum="{maxSat}" minimum="{minSat}" interval="1.0"/>
+								<!--maximum="101.0" minimum="90.0"-->
+							</mx:verticalAxis>
+						</mx:LineSeries>
+						<mx:LineSeries id="O2series2" displayName="Oxygen(%)" 
+									   yField="saturation" xField="lastChgDtm" itemRenderer="mx.charts.renderers.CircleItemRenderer"
+									   stroke="{scs4}" fill="{sc4}" lineStroke="{scs4}">
+							<mx:verticalAxis> 
+								<mx:LinearAxis id="O2v2" maximum="{maxO2}" minimum="{minO2}"
+											   interval="1.0"/>
+								<!--minimum="0.0" maximum="10.0"-->
+							</mx:verticalAxis>
+						</mx:LineSeries>					
+					</mx:series>
+					
+				</mx:LineChart>
+			</mx:Canvas>
+		</s:Group>
+		
+	</s:VGroup>
+	
+</controller:ChartController>
